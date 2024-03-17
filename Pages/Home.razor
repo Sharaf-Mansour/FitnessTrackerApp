@@ -1,7 +1,94 @@
 ﻿@page "/"
+@using FitnessTracker;
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Fitness Tracker</PageTitle>
+<div class="home gap-4">
 
-<h1>Hello, world!</h1>
+    <div class="form row">
+        <div class="form-group col-lg-6">
+            <label for="gender">Gender</label>
+            <select class='form-select @(gender.HasValue? "form-select-value" : "form-select-placeholder")' @bind="gender">
+                <option value="" disabled selected>Select Gender</option>
+                <option value="@Gender.Male">Male</option>
+                <option value="@Gender.Female">Female</option>
+            </select>
 
-Welcome to your new app.
+        </div>
+
+        <div class="form-group col-lg-6">
+            <label for="age">Age</label>
+            <input type="number" class="form-control" placeholder="Enter Age..." @bind="age" />
+        </div>
+
+        <div class="form-group col-lg-6">
+            <label for="height">Height (cm)</label>
+            <input type="number" class="form-control" placeholder="Enter Height..." @bind="height" />
+        </div>
+
+        <div class="form-group col-lg-6">
+            <label for="weight">Weight (kg)</label>
+            <input type="number" class="form-control" placeholder="Enter Weight..." @bind="weight" />
+        </div>
+
+        <div class="form-group col-lg-6">
+            <label for="activityLevel">Activity Level</label>
+            <select class='form-select @(activityLevel.HasValue? "form-select-value" : "form-select-placeholder")' @bind="activityLevel">
+                <option value="" disabled selected>Select Activity Level</option>
+                <option value="@ActivityLevel.Sedentary">Sedentary</option>
+                <option value="@ActivityLevel.LightlyActive">Lightly Active</option>
+                <option value="@ActivityLevel.ModeratelyActive">Moderately Active</option>
+                <option value="@ActivityLevel.VeryActive">Very Active</option>
+                <option value="@ActivityLevel.ExtremelyActive">Extremely Active</option>
+            </select>
+        </div>
+
+
+        <div class="result d-flex col-lg-6">
+            @if (result.HasValue)
+            {
+                <p>Daily Calorie Intake: @result</p>
+            }
+            else
+            {
+                <p  style="opacity:0.3">Submit to get your result</p>
+            }
+        </div>
+
+
+        <button class="btn btn-primary" @onclick="CalculateCalories">Calculate</button>
+
+    </div>
+
+
+    <img src="Images/fitness.png"class="d-lg-flex d-none" style="width:450px; height:450px;" alt="Fitness Image" />
+
+</div>
+@code {
+
+    private Gender? gender;
+    private double? age;
+    private double? height;
+    private double? weight;
+    private ActivityLevel? activityLevel;
+    private double? result;
+
+    private void CalculateCalories()
+    {
+        if (gender.HasValue && age.HasValue && height.HasValue && weight.HasValue && activityLevel.HasValue)
+        {
+            var fitnessInfoInstance = new FitnessTracker.FitnessInfo(
+                gender: gender.Value,
+                age: age.Value,
+                height: height.Value,
+                weight: weight.Value,
+                activityLevel: activityLevel.Value
+            );
+
+            result = fitnessInfoInstance.CalculateDailyCalorieIntake();
+        }
+        else
+        {
+            throw new InvalidOperationException("Please fill in all the fields");
+        }
+    }
+}
