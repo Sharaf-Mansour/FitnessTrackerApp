@@ -1,3 +1,8 @@
+*{
+    overflow-x: hidden;
+
+}
+
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
 }
@@ -75,3 +80,89 @@
 code {
     color: #c02d76;
 }
+.home {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+   
+}
+
+
+
+.form-control, .form-select {
+    border-radius: 15px;
+    border: 3px solid rgba(40, 107, 144, 0.15);
+    background-color: rgba(98, 192, 245, 0.2);
+    height: 60px;
+}
+
+    .form-select::selection {
+        opacity: 0.3;
+        font-size: 20px;
+    }
+
+    .form-control::placeholder {
+        opacity: 0.3;
+        font-size: 20px;
+        padding-left: 5px;
+    }
+
+
+label {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 26px;
+    padding-bottom: 20px;
+}
+.top-row {
+    background-color: #62C0F5;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    top: 0;
+}
+
+.header {
+    font-size: 90px;
+    color: #FFFFFF;
+    font-family: "Racing Sans One", sans-serif;
+    font-weight: 400;
+    padding: 16px;
+    top: 0;
+}
+
+h1.header {
+    line-height: 82px;
+}
+.loader-image{
+
+   width: 400px;
+   height: 400px;
+   z-index: 1000;
+}
+.loader {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    align-items:center;
+}
+.result {
+   
+    flex-wrap:wrap;
+    border-radius: 15px;
+    border: 3px solid rgba(40, 107, 144, 0.15);
+    background-color: rgba(98, 192, 245, 0.2);
+    height: 90px;
+    align-self: end;
+    margin-bottom: 15px;
+    align-content: center;
+    
+}
+.result p{
+    text-align: center;
+    margin:0;
+   
+
+}
+
